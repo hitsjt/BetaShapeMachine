@@ -1,0 +1,229 @@
+\usepackage{epstopdf}
+\usepackage[scaled=.92]{helvet}
+\usepackage{amsmath}
+\usepackage{url}
+%\newcommand{\comment}[1]{}
+
+\usepackage{times}
+
+%% Inline URLs
+\usepackage{url}
+
+%% AMS mathematics packages
+\usepackage{amsfonts,amsmath,amssymb}
+
+%% The 'graphicx' package allows for the inclusion of EPS figures.
+\usepackage{graphicx}
+
+%% use this for zero \parindent and non-zero \parskip, intelligently.
+
+\usepackage{parskip}
+
+%% For cells spanning multiple rows or columns in tables
+\usepackage{multirow}
+
+% this package allows psgrag (replace text in eps figures, adapt it to the paper style)
+\usepackage{psfrag}
+
+
+%% Arrays
+%\usepackage{array}
+
+%% A tabular column that left-aligns its contents with a ragged-right margin (p{} justifies by default). Requires array.
+%\newcolumntype{x}[1]{%
+%>{\raggedright\hspace{0pt}}p{#1}}%
+
+% This package allows multi-line comments.
+\usepackage{verbatim}
+
+%% Optional: the 'caption' package provides a nicer-looking replacement
+%% for the standard caption environment. With 'labelfont=bf,'textfont=it',
+%% caption labels are bold and caption text is italic.
+%\usepackage[labelfont=bf,textfont=it]{caption}
+%% Figures and tables with subfigures and subtables
+%\usepackage[font=normalsize]{subcaption}
+
+%% The `hyperref' package creates hyperlinked references and citations
+%%
+%% The package has a bug which may generate the following error message:
+%%   ! pdfTeX error (ext4): \pdfendlink ended up in different nesting level than \pdfstartlink.
+%% if a single citation is broken across pages. To debug, add the "draft"
+%% option to hyperref, locate the offending citation, and change document
+%% spacing a bit until the break is removed.
+%%
+%\usepackage[usenames,dvipsnames]{xcolor}% for hyperref
+%\usepackage[citecolor=black,citebordercolor=white,colorlinks=false]{hyperref}
+
+% Text wrapping around figure
+\usepackage{wrapfig}
+
+% In-para lists
+\usepackage{paralist}
+
+% Formatting the list environments
+\usepackage{enumitem}
+\setdescription{leftmargin=0.25cm}
+
+% text colors
+\usepackage[usenames,dvipsnames]{color}
+
+% algorithm package
+\usepackage[]{algorithm2e}
+
+
+% list
+\newenvironment{my_itemize}{
+\begin{description} %{labelitemi}{$\bullet$}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+  }
+{\end{description}}
+
+\newcounter{mycounter}
+\newenvironment{noindlist}
+ {\begin{list}{\arabic{mycounter}.~~}{\usecounter{mycounter} \labelsep=0em \labelwidth=0em \leftmargin=0em \itemindent=0em}}
+ {\end{list}}
+
+%% Symbols
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bc}{\mathbf{c}}
+\newcommand{\bd}{\mathbf{d}}
+\newcommand{\be}{\mathbf{e}}
+\newcommand{\bff}{\mathbf{f}}
+\newcommand{\bg}{\mathbf{g}}
+\newcommand{\bh}{\mathbf{h}}
+\newcommand{\bi}{\mathbf{i}}
+\newcommand{\bj}{\mathbf{j}}
+\newcommand{\bk}{\mathbf{k}}
+\newcommand{\bl}{\mathbf{l}}
+\newcommand{\bm}{\mathbf{m}}
+\newcommand{\bn}{\mathbf{n}}
+\newcommand{\bo}{\mathbf{o}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\br}{\mathbf{r}}
+\newcommand{\bs}{\mathbf{s}}
+\newcommand{\bt}{\mathbf{t}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+\newcommand{\balpha}{\mbox{\boldmath$\alpha$}}
+\newcommand{\bgamma}{\mbox{\boldmath$\gamma$}}
+\newcommand{\bGamma}{\mbox{\boldmath$\Gamma$}}
+\newcommand{\bmu}{\mbox{\boldmath$\mu$}}
+\newcommand{\bphi}{\mbox{\boldmath$\phi$}}
+\newcommand{\bksi}{\mbox{\boldmath$\xi$}}
+\newcommand{\bPhi}{\mbox{\boldmath$\Phi$}}
+\newcommand{\bSigma}{\mbox{\boldmath$\Sigma$}}
+\newcommand{\bsigma}{\mbox{\boldmath$\sigma$}}
+\newcommand{\btheta}{\mbox{\boldmath$\theta$}}
+
+\newcommand{\Ex}{\mathbb{E}}
+\newcommand{\Var}{\mathbb{V}ar}
+
+\newcommand{\mB}{\mathcal{B}}
+\newcommand{\mL}{\mathcal{L}}
+\newcommand{\mN}{\mathcal{N}}
+\newcommand{\mU}{\mathcal{U}}
+\newcommand{\mC}{\mathcal{C}}
+\newcommand{\mS}{\mathcal{S}}
+\newcommand{\mR}{\mathcal{R}}
+\newcommand{\mD}{\mathcal{D}}
+\newcommand{\mT}{\mathcal{T}}
+\newcommand{\mV}{\mathcal{V}}
+\newcommand{\mSl}{\mathcal{S}_l}
+\newcommand{\mNl}{\mathcal{N}_l}
+\newcommand{\mDll}{\mathcal{D}_{l,l'}}
+
+\def\ll{{\mathcal{\ell}}}
+
+\def\A{{\cal A}}
+\def\B{{\cal B}}
+\def\C{{\cal C}}
+\def\D{{\cal D}}
+\def\E{{\cal E}}
+\def\F{{\cal F}}
+\def\G{{\cal G}}
+\def\H{{\cal H}}
+\def\I{{\cal I}}
+\def\J{{\cal J}}
+\def\K{{\cal K}}
+\def\L{{\cal L}}
+\def\M{{\cal M}}
+\def\N{{\cal N}}
+\def\O{{\cal O}}
+\def\P{{\cal P}}
+\def\Q{{\cal Q}}
+\def\R{{\cal R}}
+\def\S{{\cal S}}
+\def\T{{\cal T}}
+\def\U{{\cal U}}
+\def\V{{\cal V}}
+\def\W{{\cal W}}
+\def\X{{\cal X}}
+\def\Y{{\cal Y}}
+\def\Z{{\cal Z}}
+\def\Re{{\mathbb R}}
+\def\Cx{{\mathbb C}}
+\def\Ze{{\mathbb Z}}
+\def\Na{{\mathbb N}}
+\def\Wh{{\mathbb W}}
+\def\bd{\partial}
+\def\ud{\mathrm{d}}
+\def\eps{\varepsilon}
+\def\dist{\textrm{dist}}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% 4. COMMENTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Inlined comments
+\def\marrow{}
+\def\vangelis#1{\marrow\textcolor{magenta}{({Vangelis says: }{#1})}}
+%\def\vangelis#1{}
+\def\haibin#1{\marrow\textcolor{green}{({Haibin says: }{#1})}}
+
+%\def\rev#1{\marrow\textcolor{red}{{#1}}}
+\def\rev#1{#1}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%% 5. SPACE COMPRESSION %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\linespread{0.9}
+
+
+

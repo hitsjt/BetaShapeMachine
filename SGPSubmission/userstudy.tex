@@ -1,0 +1,26 @@
+%
+\documentclass[11pt,a4paper]{article}
+\usepackage{amsmath,epsfig}
+\input{additional_format_symbols}
+\date{}
+
+\setcounter{page}{26}
+
+\begin{document}
+
+\title {Analysis and synthesis of 3D shape families via deep-learned generative models of surfaces \\ User Study}
+\maketitle
+
+We conducted a perceptual evaluation of our synthesized shapes with volunteers recruited through Amazon Mechanical Turk. Each volunteer performed $40$ pairwise comparisons in a web-based questionnaire. Each comparison was between images of two shapes from the chairs or airplanes domain. For each pair, one shape was coming from the training collection of one of the two domains, and the other shape was coming from our collection of synthesized shapes of the same domain. The two shapes were randomly sampled from their collections. They appeared in a random order on the web pages of the questionnaire. 
+
+The participants were asked to choose which of the two presented shapes was more plausible, or indicate whether they found both shapes to be equally plausible, or none of them to be plausible. Each questionnaire contained $20$ unique comparisons and each comparison was repeated twice by flipping the order of the two shapes in the question. To diminish the risk of contaminating the results of the user study with unreliable respondents, we excluded participants that gave two different answers to more than $6$ of the $20$ unique comparisons, or took less than $2$ minutes in total to complete the questionnaire. 
+
+The number of reliable Mechanical Turk respondents after the above filtering was $31$. A total of $1240$ pairwise comparisons were gathered in total. The results are visualized in the following figure. The user study indicates that the shapes produced by our model were seen as plausible as the training shapes of the input collection. 
+
+\begin{figure*}[h!]
+\centering
+\includegraphics[width=1.0\textwidth]{figures/user_study}
+\caption{Results of our Amazon Mechanical Turk user study}
+\end{figure*}
+
+\end{document} 

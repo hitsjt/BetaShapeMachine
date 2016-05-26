@@ -1,0 +1,19 @@
+We thank the reviewers for the insightful comments. We revised our paper according to the requested changes:
+
+a) we changed the title to clarify that deep learning is used to learn the generative model of surfaces (rather than a "representation"). Our method introduces a generative surface model (Beta Shape Machine) with deep architecture and learned parameters, thus it is "deep-learned". See Bengio 2009 ("Learning deep architectures for AI") for definitions of "deep architectures" and "deep learning". 
+
+b) We included a new application of our generative model: the uppermost layer can be used as a compact shape descriptor (or "feature representation") to directly perform fine-grained classification within a shape family. Thus, our model can also be used in the "traditional" sense if desired. Since our method can be used for shape correspondence, segmentation, classification, and synthesis, we replaced "correspodence and synthesis" with "analysis and synthesis" in our title. 
+
+c) we included discussion of other generative models as asked by the reviews.
+
+d) we elaborated on the motivation for using deep learning in the introduction. In addition, we included a new Figure (Fig 7) that demonstrates an example of the information content captured in the variables of our model, further motivating the use of hierarchical architectures. 
+
+e) we included missing citations and added discussion.
+
+f) it is impossible to reduce the paper size to 12 pages without removing essential information about our model. There are no derivations or proofs in our paper, but only formulas to define our model and objective function. The derivations are exclusively included in the supplementary material. Our generative model does not re-implement an existing ML approach and has novelty itself, thus its formulation needs to be described in the paper.
+
+g) code was already included in the submitted supplementary material and we will release it in our project page
+
+h) The new figure 7 demonstrates an example where the shape variability cannot be modeled with boxes e.g., transitioning from straight to delta-shaped wings cannot be done with box transformations. Figure 9 already demonstrates the performance difference between using templates with learned geometry instead of box templates (Kim et al). 
+
+i) We replaced the term "part representations" with "part templates" throughout the text to avoid confusion with terms used in concurrent work in computer vision. We corrected various typos in the paper and performed minor text changes. 

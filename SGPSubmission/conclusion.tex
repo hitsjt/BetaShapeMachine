@@ -1,0 +1,14 @@
+\section{Limitations and Discussion}
+\label{sec:limitations_discussion}
+
+\rev{Our paper described a method for joint shape analysis and synthesis in a shape collection: our method learns \rev{part templates}, computes shape correspondence and part segmentations, generates new shape surface variations, and yields shape descriptors for fine-grained classification. Our method represents an early attempt in this area, thus there are several limitations to our method and many exciting directions for future work.} First, our method is greedy in nature. Our method relies on approximate inference for both the CRF deformation and the BSM generative model. Learning relies on approximate techniques. As a result, the sampled point clouds are not smooth and noiseless. We used conservative deformations of parts from the input collection to factor out the noise and preserve surface detail during shape synthesis. Assembling shapes from parts suffers from various limitations: adjacent parts are not always connected in a plausible manner, segmentation artifacts affect the quality of the produced shapes, topology changes are not supported. Instead of re-using parts from the input collection, it would be more desirable to extend our generative model with layers that produce denser point clouds. In this case, the denser point clouds could be used as input to surface reconstruction techniques to create new shapes entirely from scratch. However, the computational cost for learning such generative model with dense output would be much higher. From this aspect, it would be interesting to explore more efficient learning techniques in the future. Our \rev{part template} learning procedure relies on provided initial rigid shape alignments and segmentations, which can sometimes be incorrect. \rev{It would be better to fully exploit the power of our probabilistic model to perform rigid alignment. Deep learning architectures could be used to estimate initial segmentations and correspondences.} \rev{The learned shape descriptor could improve the shape grouping}. Finally, the variability of the synthesized shapes seems somewhat limited. Fruitful directions include investigating deeper architectures, better sampling strategies, and matching \rev{ templates} with multiple symmetric parts if such exist in the input shapes. 
+
+\vspace{-2mm}
+
+\paragraph*{Acknowledgements.} 
+Kalogerakis gratefully acknowledges support from NSF (CHS-1422441).
+We thank Qi-xing Huang and Vladimir Kim for sharing data from their methods.
+We thank Siddhartha Chaudhuri and anonymous reviewers for valuable comments. 
+We thank Szymon Rusinkiewicz for distributing the trimesh2 library. 
+
+\vspace{-1mm}

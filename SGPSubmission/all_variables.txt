@@ -1,0 +1,24 @@
+- k: point on part representation [ total number of points K ]
+- t: input shape index [ total T shapes ]
+- p: input shape point 
+- l: part label index
+- m: index for BSM latent variable of first hidden layer
+- n: index for BSM latent variable of second hidden layer
+- o: index for BSM latent variable of third hidden layer
+- r: index for BSM latent variable for structure
+- \tau: index for x,y,z-coordinate of a point
+
+- Y_k: latent part representation
+- D_{t,k}: deformation of part representation point k given shape t
+- U_{t,p}: assignment of point p of input shape t to part representation points 
+- S_{t,p}: assignment of point p of input shape t to part label
+- X_{t,p}: position of point p of input shape t
+- f_{t,p} / f_k: feature vector for a point
+- E_k: existence variable of part representation point k
+
+- H_m, H_n, H_o: latent BSM variables for geometry
+- G_r: latent BSM variables for structure
+
+
+- a, b, c, d, w: BSM parameters
+- \lambda: regularization parameters

@@ -1,0 +1,326 @@
+\section{Mean-field inference equations}
+\label{sec:mean-field-appendix}
+
+According to the mean-field approximation theory \cite{Koller09}, given a probability distribution $P$ defined over a set of variables $X_1, X_2, ..., X_V$, we can approximate it with a simpler distribution $Q$, expressed as a product of individual distributions over each variable, such that the KL-divergence of $P$ from $Q$ is minimized: 
+
+\begin{align*}
+KL(Q \mid \mid P) = \sum\limits_{X_1}\sum\limits_{X_2}...\sum\limits_{X_V} Q(X_1, X_2, ..., X_V) \cdot \ln \frac{ Q(X_1, X_2, ..., X_V) } { P(X_1, X_2, ..., X_V) }
+\end{align*}
+In the case of continuous variables, the above sums are replaced with integrals over their value space. Suppose that the original distribution $P$ is defined  as a product of factors:
+\begin{align*}
+P(X_1, X_2, ..., X_V) = \frac{1}{Z} \prod\limits_{s=1...S} \phi_s(\bD_s)
+\end{align*}
+where $\bD_s$ is a subset of the random variables (called scope) for each factor $s$ in the distribution $P$, and $Z$ is a normalization constant. 
+
+Minimizing the KL-divergence  of $P$ from $Q$ yields the following mean-field updates for each variable $X_v$ ($v=1...V$):
+\begin{align*}
+Q(X_v) = \frac{1}{Z_v} \exp \bigg\{ \sum\limits_s \sum\limits_{\bD_s-\{X_v\}} Q( \bD_s-\{X_v\} ) \ln \phi_s(\bD_s) \bigg\}
+\end{align*}
+where $Z_v=\sum\limits_{X_v} Q(X_v)$ is a normalization constant for this distribution (the sum is replaced with the integral over the value space of $X_v$ if this is a continuous variable), and $\bD_s-\{X_v\}$ is the subset of the random variables for the factor $s$ excluding the variable $X_v$. 
+
+Below we specialize the above update formula for each of our variable in our probabilistic model. 
+
+
+\subsection{Deformation variables}
+
+The mean-field update for each deformation variables is the following:
+
+\begin{align*}
+Q(\bD_{t,k}) \propto \exp\bigg\{ & -0.5 \sum\limits_p Q(U_{t,p} = k) (\bD_{t,k} - \bX_{t,p})^T \Sigma_1^{-1} (\bD_{t,k} - \bX_{t,p}) \\
+& -0.5 \sum\limits_{k' \in N(k)} (\bD_{t,k} - \bmu_{t,k,k'})^T \Sigma_2^{-1}(\bD_{t,k} - \bmu_{t,k,k'} )  \bigg\}
+\end{align*}
+where $\mN(k)$ includes all neighboring points $k'$ of point $k$ on the \rev{part template} (see main text of the paper) and $\bmu_{t,k}$ is a 3D vector defined as follows:
+\begin{align*}
+\bmu_{t,k,k'} = \Ex_Q[\bD_{t,k'}] + ( \Ex_Q[\bY_{k}] - \Ex_Q[\bY_{k'}] ) )
+\end{align*}
+
+We note that the above distribution is a product of Gaussians; when re-normalized, the distribution is equivalent to a Gaussian with the following expectation, or mean, which we use in other updates:
+
+\begin{align}
+\Ex_Q[\bD_{t,k}]  = & ( \sum\limits_p Q(U_{t,p} = k) \Sigma_1^{-1}  + \sum\limits_{k' \in N(k)}\Sigma_2^{-1} )^{-1}  \nonumber  \\
+&\cdot ( \sum\limits_p Q(U_{t,p} = k) \Sigma_1^{-1} \bX_{t,p} + \sum\limits_{k' \in N(k)}\Sigma_2^{-1} \bmu_{t,k,k'}  )
+\label{eqn:D}
+\end{align}
+
+The above formula indicates that the most likely deformed position of a point on a \rev{part template} is a weighted average of its associated points on the input surface as well as its neighbors. The weights are controlled by the covariance matrices $\Sigma_1$ and $\Sigma_2$ as well as the degree of association between the \rev{part template} point and each input surface point, given by $Q(U_{t,p}=k)$. The covariance matrix of the above distribution is forced to be diagonal (see next section); its diagonal elements tend to increase when the input surface points have weak associations with the \rev{part template} point, as indicated by the following formula:
+
+\begin{align*}
+Cov_Q[\bD_{t,k}]  = ( \sum\limits_p Q(U_{t,p} = k) \Sigma_1^{-1}  + \sum\limits_{k' \in N(k)}\Sigma_2^{-1} )^{-1}
+\end{align*}
+
+Computing the above expectation and covariance for each variable $\bD_{t,k}$ involving summing over every surface point $p$ on the input shape $t$. This is computationally too expensive. Practically in our implementation, we find the $100$ nearest input surface points for each \rev{part template} point $k$, and we also find the $20$ nearest \rev{part template} points for each input surface point $p$. For each \rev{template} point $k$, we always keep indices to its $100$ nearest surface points as well as the surface points whose nearest points include that \rev{template} point $k$. Instead of summing over all the surface points of each input shape, for each \rev{template} point $k$ we sum over its abovementioned indices to surface point only. For the rest of the surface points, the distribution values  $Q(U_{t,p}=k)$ are practically negligible and are skipped in the above summations.
+
+
+\subsection{Part template variables}
+
+For each \rev{part template} point $\bY_k$, the mean-field update is given by:
+
+\begin{align*}
+& Q(\bY_k) \propto \exp\bigg\{ -.5(\bY_k - \bmu_k )^T \Sigma_2^{-1} ( \bY_k -  \bmu_k )  \bigg\}
+\end{align*}
+where $\bmu_k$ is the mean, or expectation (3D vector), defined as follows:
+\begin{align*}
+\bmu_k = \Ex_Q[\bY_{k}] = \frac{1}{|\mN(k)|} \sum\limits_{k'} \big( \Ex_Q[\bY_{k'}] + \frac{1}{T}\sum\limits_t(\Ex_Q[\bD_{t,k}] - \Ex_Q[\bD_{t,k'}]) \big)
+\end{align*}
+and $\mN(k)$ includes all neighboring points $k'$ of point $k$ on the \rev{part template}, $T$ is the number of input shapes. The covariance matrix for the above distribution is given by $\Sigma_2$. 
+
+\subsection{Point correspondence variables}
+
+The mean-field update for the latent variables $U_{t,p}$ yields a categorical distribution computed as follows:
+
+\begin{align*}
+Q(U_{t,p} = k) \propto \exp\bigg\{ & - 0.5(\Ex_Q[\bD_{t,k}] - \bX_{t,p})^T \Sigma_1^{-1} (\Ex_Q[\bD_{t,k}] - \bX_{t,p}) \\ 
+& -0.5 Tr( \Sigma_1^{-1} \cdot Cov_Q[\bD_{t,k}] ) \\
+& -0.5(\bff_{k} - \bff_{t,p})^T \Sigma_3^{-1} (\bff_{k} - \bff_{t,p})  - \ln\epsilon \cdot Q(S_{t,p} = label(k)) \bigg\}
+\end{align*}
+
+where $Tr( \Sigma_1^{-1} \cdot Cov_Q[\bD_{t,k}] )$ represents the matrix trace, $\epsilon$ is a small constant discussed in the main text of the paper. For computational efficiency reasons, we avoid computing the above distribution for all pairs of \rev{part template} and input surface points. As in the case of the updates for the deformation variables,  we keep indices to input surface point positions that are nearest neighbors to \rev{part template} points and vice versa. We compute the above distributions only for pairs between these neighboring points. For the rest of the pairs, we set $Q(U_{t,p}=k) = 0$.
+
+\subsection{Segmentation variables}
+
+The mean-field update for the variables $S_{t,p}$ also yields a categorical distribution:
+
+\begin{align*}
+Q(S_{t,p} = l) \propto \exp\bigg\{ & \sum\limits_k Q(U_{t,p} = k) [label(k) \ne l] \ln\epsilon \\
+& + \sum\limits_{p' \in N(p)} \sum\limits_{l' \ne l} Q(S_{t,p'} = l' ) \ln( 1.0 - \Phi ) \\
+& + \sum\limits_{p' \in N(p)} Q(S_{t,p'} = l ) \ln( \Phi ) \bigg\} \\
+\end{align*}
+
+where $N(p)$ is the neighborhood of the input surface point used for segmentation (see main text for more details), $Phi$ evaluates feature differences between neighboring surface points (see main text for its definition). The binary indicator function $[label(k) \ne l]$ is $1$ if the expression in brackets holds, otherwise it is $0$. 
+%(i.e., the evaluated label $l$ of the input surface point is different than the label of its corresponding \rev{part template} point)
+
+\section{Covariance matrix updates}
+
+The covariance matrices of our factors are updated as follows: 
+
+\begin{align*}
+\Sigma_1 & = \frac{1}{Z_1} \sum\limits_{t,k,p \in \mN(k)} Q(U_{t,p} = k) (\Ex_Q[\bD_{t,k}] - \bX_{t,p}) (\Ex_Q[\bD_{t,k}] - \bX_{t,p})^T \\
+\end{align*}
+\begin{align*}
+\Sigma_2 = \frac{1}{Z_2} \sum\limits_{t,k,k' \in N(k)} & ( (\Ex_Q[\bD_{t,k}] - \Ex_Q[\bD_{t,k'}]) - (\Ex_Q[\bY_k] - \Ex_Q[\bY_{k'}]) ) \cdot \\
+& \cdot (\Ex_Q[\bD_{t,k}] - \Ex_Q[\bD_{t,k'}] - (\Ex_Q[\bY_k] - \Ex_Q[\bY_{k'}]) )^T
+\end{align*}
+\begin{align*}
+\Sigma_3 = \frac{1}{Z_3}\sum\limits_{t,k,p \in \mN(k)}  Q(U_{t,p} = k) (\bff_k - \bff_{t,p}) (\bff_k - \bff_{t,p})^T 
+\end{align*}
+\begin{align*}
+\Sigma_5 = \frac{1}{Z_5} \sum\limits_{t,p,p' \in N(p)} ( \bff_{t,p} - \bff_{t,p'}) ( \bff_{t,p} - \bff_{t,p'})^T \\
+\end{align*}
+
+where $Z_1=Z_3=\sum\limits_{t,k,p \in \mN(k)} Q(U_{t,p} = k)$, $Z_2=\sum\limits_{t,k,k' \in N(k)} 1$, $Z_5=\sum\limits_{t,p,p' \in N(p)} 1$. The computed covariance matrices are forced to be diagonal i.e., in the above computations only the diagonal elements of the covariance matrices are taken into account, while the rest of the elements are set to $0$. 
+
+
+\section{Contrastive divergence}
+
+Contrastive divergence iterates over the following three steps in our implementation: variational (mean-field) inference, stochastic approximation (or sampling), and parameter updates. We discuss the steps in detail below. 
+
+\textbf{Variational inference step.} 
+Our deformation model yields expectations over deformed point positions of the \rev{part templates} based on Equation \ref{eqn:D}. For each deformed point, we find the surface point that is closest to its expected position. Let $D_{k,\tau}[t]$ the observed surface position of point $k$ for an input shape $t$. The subscript $\tau$ takes values $1$, $2$, or $3$ that correspond to the $x-$,$y-$,$z-$ coordinate of the point respectively. Let $E_{k}[t]$ represents the observed existence of a point $k$ (binary variable) also inferred by our deformation model. Given all observed point positions  $\bD[t]$ and existences $\bE[t]$ per shape $t$, we perform bottom-up mean-field inference on the binary hidden nodes according to the following equations in the following order:
+
+\begin{align*}
+Q( H_m^{(1)} = 1 | \bD[t], \bE[t] ) =
+\sigma \bigg( w_{m, 0} & + \sum\limits_{k \in \mN_m,\tau} (  a_{k,\tau,m} - c_{k,\tau,m} ) \ln(D_{k,\tau}[t]) E_k[t] \\
+& + \sum\limits_{k \in \mN_m,\tau} (  b_{k,\tau,m} - d_{k,\tau,m} ) \ln(1 - D_{k,\tau}[t]) E_k[t] \\
+& +  \sum\limits_{n} w_{m, n} Q( H_n^{(2)} = 1 | \bD[t], \bE[t] ) \bigg)
+\end{align*}
+\begin{align*}
+Q( H_n^{(2)} = 1 | \bD[t], \bE[t] ) = \sigma \bigg( w_{n, 0} & + 
+ \sum\limits_{m} w_{m, n} Q( H_m^{(1)} = 1 | \bD[t], \bE[t] ) \\
+& + \sum\limits_{o} w_{n, o} Q( H_o^{(3)} = 1 | \bD[t], \bE[t] ) \bigg)
+\end{align*}
+\begin{align*}
+Q( H_o^{(3)} = 1 | \bD[t], \bE[t] ) = \sigma \bigg( w_{o, 0} + \sum\limits_{n} w_{n, o} Q( H_n^{(2)} = 1 | \bD[t], \bE[t] ) \bigg)
+\end{align*}
+
+where $\sigma(\cdot)$ represents the sigmoid function, $\mN_m$ is the set of the observed variables each hidden node (variable) $H_m^{(1)}$ is connected to. The mean-field updates for $H_m^{(1)}$ involve a weighted summation over the observed variables $\bD[t]$ per part, which can be thought of as a convolutional scheme per part. We perform $3$ mean-field iterations alternating the updates over the above hidden nodes. During the first iteration, we initialize $Q( H_n^{(2)} = 1 )=0$ and $Q( H_o^{(3)} = 1 ) = 0$ for each hidden node $n$ and $o$. 
+
+\textbf{Stochastic approximation}. This step begins by sampling the binary hidden nodes of the top layer for each training shape $t$. Sampling is performed according to the inferred distributions $Q( H_o^{(3)} = 1 | \bD[t], \bE[t] )$ of the previous step. Let $H_o^{(3)}[t']$ the resulting sampled $0/1$ values. Then we perform top-down mean-field inference on the binary hidden nodes of the other layers as well as the visible layer: 
+
+\begin{align*}
+Q( H_n^{(2)} = 1 | \bE[t], \bH^{(3)}[t'] ) = \sigma \bigg( w_{n, 0} & + 
+    \sum\limits_{m} w_{m, n} Q( H_m^{(1)} = 1 | \bE[t], \bH^{(3)}[t'] ) \\
+& + \sum\limits_{o} w_{n, o} H_o^{(3)}[t'] \bigg)
+\end{align*}
+\begin{align*}
+Q( H_m^{(1)} = 1 | \bE[t], \bH^{(3)}[t'] ) =
+\sigma \bigg( w_{m, 0} & + \sum\limits_{k \in \mN_m,\tau} (  a_{k,\tau,m} - c_{k,\tau,m} ) \ln(D_{k,\tau}[t']) E_k[t] \\
+& + \sum\limits_{k \in \mN_m,\tau} (  b_{k,\tau,m} - d_{k,\tau,m} ) \ln(1 - D_{k,\tau}[t']) E_k[t] \\
+& + \sum\limits_{n} w_{m, n} Q( H_n^{(2)} = 1 | \bE[t], \bH^{(3)}[t'] ) \bigg)
+\end{align*}
+\begin{align*}
+& Q( D_{k,\tau} | \bE[t], \bH^{(3)}[t'] ) \propto \\
+& D_{k,\tau} ^{ (a_{k,\tau,0}-1) + \sum\limits_{m \in \mN_k} a_{k,\tau,m} Q( H_m^{(1)} = 1 | \bE[t], \bH^{(3)}[t'] ) 
++ \sum\limits_{m \in \mN_k} c_{k,\tau,m} (1-Q( H_m^{(1)} = 1 | \bE[t], \bH^{(3)}[t'] ))} \\
+&  (1-D_{k,\tau}) ^{ (b_{k,\tau,0}-1) + \sum\limits_{m \in \mN_k} b_{k,\tau,m} Q( H_m^{(1)} = 1 | \bE[t], \bH^{(3)}[t'] ) 
++ \sum\limits_{m \in \mN_k} d_{k,\tau,m} (1-Q( H_m^{(1)} = 1 | \bE[t], \bH^{(3)}[t'] ))}
+\end{align*}
+where $D_{k,\tau}[t']$ in the above mean-field updates is set to be the expectation of the above Beta distribution and $\mN_k$ is the set of the hidden variables each observed node (variable) $D_{k,\tau}$ is connected to. We note that sampling all the variables in the model caused contrastive divergence not to converge, thus we instead used expectations of the above distributions instead. As in the previous step, we performed $3$ iterations alternating over the above mean-field updates. During the first iteration, we skip the terms involving $D_{k,\tau}[t']$ during the inference of the hidden nodes of the first layer. At the second and third iteration, we infer distributions for the hidden layers as follows:
+\begin{align*}
+Q( H_o^{(3)} = 1 | \bD[t'], \bE[t] ) = \sigma \bigg( w_{o, 0} + \sum\limits_{n} w_{n, o} Q( H_n^{(2)} = 1 | \bD[t'], \bE[t] ) \bigg)
+\end{align*}
+\begin{align*}
+Q( H_n^{(2)} = 1 | \bD[t'], \bE[t] ) = \sigma \bigg( w_{n, 0} & + 
+    \sum\limits_{m} w_{m, n} Q( H_m^{(1)} = 1 | \bD[t'], \bE[t] ) \\
+& + \sum\limits_{o} w_{n, o} Q( H_o^{(3)} = 1 | \bD[t'], \bE[t] ) \bigg)
+\end{align*}
+\begin{align*}
+Q( H_m^{(1)} = 1 | \bD[t'], \bE[t]] ) =
+\sigma \bigg( w_{m, 0} & + \sum\limits_{k \in \mN_m,\tau} (  a_{k,\tau,m} - c_{k,\tau,m} ) \ln(D_{k,\tau}[t']) E_k[t] \\
+& + \sum\limits_{k \in \mN_m,\tau} (  b_{k,\tau,m} - d_{k,\tau,m} ) \ln(1 - D_{k,\tau}[t']) E_k[t] \\
+& + \sum\limits_{n} w_{m, n} Q( H_n^{(2)} = 1 | \bD[t'], \bE[t] ) \bigg)
+\end{align*}
+
+
+\textbf{Parameter updates}. The parameters of the model are updated with project gradient ascent according to the expectations over the final distributions computed in the previous two steps and the observed data. We list the parameter updates below. We note that $sgn(\cdot)$ used below denotes the sign function, $\nu$ is the iteration number (or epoch), $\eta$ is the learning rate, $\mu$ is the momentum rate. The learning rate is set to $0.001$ initially, and is multiplied by a factor $0.9$ when at the previous epoch the reconstruction error $\sum_{t,k,\tau} |D_{k,\tau}[t] E_k[t] -  D_{k,\tau}[t'] E_k[t] |$ increases, and it is multiplied by a factor $1.1$ when the reconstruction error decreases. The momentum rate is progressively increased from $0.5$ towards $1.0$ asymptotically during training.
+
+\begin{align*}
+a_{k,\tau,0} = max( a_{k,\tau,0} + \Delta a_{k,\tau,0}[\nu], 0 ) \textrm{\,\,\,\,, where}
+\end{align*}
+\begin{align*}
+\Delta a_{k,\tau,0}[\nu] & = \mu \cdot \Delta a_{k,\tau,0}[\nu-1] + \eta \frac{1}{T}\sum\limits_t \bigg( \ln(D_{k,\tau}[t]) - \ln(D_{k,\tau}[t']) \bigg) \\
+& - \eta \lambda_1 \sum\limits_{k' \in \mN_k} sgn( a_{k,\tau,0} - a_{k',\tau,0} ) - \eta \lambda_2 sgn( a_{k,\tau,0} ) \\
+\end{align*}
+
+\begin{align*}
+b_{k,\tau,0} = max( b_{k,\tau,0} + \Delta b_{k,\tau,0}[\nu], 0 ) \textrm{\,\,\,\,, where} \\
+\end{align*}
+\begin{align*}
+\Delta b_{k,\tau,0}[\nu] & = \mu \cdot \Delta b_{k,\tau,0}[\nu-1] + \eta \frac{1}{T}\sum\limits_t  \bigg( \ln(1-D_{k,\tau}[t]) - \ln(1-D_{k,\tau}[t']) \bigg) \\
+& - \eta \lambda_1 \sum\limits_{k' \in \mN_k} sgn( b_{k,\tau,0} - b_{k',\tau,0} ) - \eta \lambda_2 sgn( b_{k,\tau,0} )  \\
+\end{align*}
+
+\begin{align*}
+a_{k,\tau,m} = max( a_{k,\tau,m} + \Delta a_{k,\tau,m}[\nu], 0) \textrm{\,\,\,\,, where}
+\end{align*}
+\begin{align*}
+\Delta a_{k,\tau,m}[\nu] & = \mu \cdot \Delta a_{k,\tau,m}[\nu-1] + \eta \frac{1}{T}\sum\limits_t \bigg( \ln(D_{k,\tau}[t]) Q( H_m^{(1)} = 1 | \bD[t], \bE[t] ) \\
+     								  				  &-\ln(D_{k,\tau}[t']) Q( H_m^{(1)} = 1 | \bD[t'], \bE[t] ) \bigg) \\
+& - \eta \lambda_1 \sum\limits_{k' \in \mN_k} sgn( a_{k,\tau,m} - a_{k',\tau,m} ) - \eta \lambda_2 sgn( a_{k,\tau,m} ) \\
+\end{align*}
+
+\begin{align*}
+b_{k,\tau,m} = max( b_{k,\tau,m} + \Delta b_{k,\tau,m}[\nu], 0) \textrm{\,\,\,\,, where}
+\end{align*}
+\begin{align*}
+\Delta b_{k,\tau,m}[\nu] &= \mu \cdot \Delta b_{k,\tau,m}[\nu-1] + \eta \frac{1}{T}\sum\limits_t  \bigg( \ln(1-D_{k,\tau}[t]) Q( H_m^{(1)} = 1 | \bD[t], \bE[t] ) \\
+     								  				  &-\ln(1-D_{k,\tau}[t']) Q( H_m^{(1)} = 1 | \bD[t'], \bE[t] ) \bigg) \\
+& - \eta \lambda_1 \sum\limits_{k' \in \mN_k} sgn( b_{k,\tau,m} - b_{k',\tau,m} ) - \eta \lambda_2 sgn( b_{k,\tau,m} )  \\
+\end{align*}
+
+\begin{align*}
+c_{k,\tau,m} = max( c_{k,\tau,m} + \Delta c_{k,\tau,m}[\nu], 0) \textrm{\,\,\,\,, where}
+\end{align*}
+\begin{align*}
+\Delta c_{k,\tau,m}[\nu] &= \mu \cdot \Delta c_{k,\tau,m}[\nu-1] + \eta \frac{1}{T}\sum\limits_t  \bigg( \ln(D_{k,\tau}[t]) (1-Q( H_m^{(1)} = 1 | \bD[t], \bE[t] ) \\
+     								  				  &-\ln(D_{k,\tau}[t']) (1-Q( H_m^{(1)} = 1 | \bD[t'], \bE[t] ) \bigg) \\
+& - \eta \lambda_1 \sum\limits_{k' \in \mN_k} sgn( c_{k,\tau,m} - c_{k',\tau,m} ) - \eta \lambda_2 sgn( c_{k,\tau,m} )  \\
+\end{align*}
+
+\begin{align*}
+d_{k,\tau,m} = max( d_{k,\tau,m} + \Delta d_{k,\tau,m}[\nu], 0) \textrm{\,\,\,\,, where}
+\end{align*}
+\begin{align*}
+\Delta d_{k,\tau,m}[\nu] &= \mu \cdot \Delta d_{k,\tau,m}[\nu-1] + \eta\frac{1}{T}\sum\limits_t  \bigg( \ln(1-D_{k,\tau}[t]) (1-Q( H_m^{(1)} = 1 | \bD[t], \bE[t] ) \\     								  				  &-\ln(1-D_{k,\tau}[t']) (1-Q( H_m^{(1)} = 1 | \bD[t'], \bE[t] ) \bigg) \\
+& - \eta \lambda_1 \sum\limits_{k' \in \mN_k} sgn( d_{k,\tau,m} - d_{k',\tau,m} ) -\eta \lambda_2 sgn( d_{k,\tau,m} )  \\
+\end{align*}
+
+\begin{align*}
+w_{m, 0} = w_{m, 0} + \Delta w_{m, 0}[\nu]  \textrm{\,\,\,\,, where}
+\end{align*}
+\begin{align*}
+\Delta w_{m, 0}[\nu] &= \mu \cdot \Delta w_{m, 0}[\nu-1] + \eta \frac{1}{T}\sum\limits_t  \bigg( Q( H_m^{(1)} = 1 | \bD[t], \bE[t] ) \\
+& - Q( H_m^{(1)} = 1 | \bD[t'], \bE[t] ) \bigg) \\
+& - \eta \lambda_2 sgn( w_{m, 0} )  \\
+\end{align*}
+
+\begin{align*}
+w_{n, 0} = w_{n, 0} + \Delta w_{n, 0}[\nu] \textrm{\,\,\,\,, where}
+\end{align*}
+\begin{align*}
+\Delta w_{n, 0}[\nu] &= \mu \cdot \Delta w_{n, 0}[\nu-1] + \eta \frac{1}{T}\sum\limits_t  \bigg( Q( H_n^{(2)} = 1 | \bD[t], \bE[t] ) \\
+& - Q( H_n^{(2)} = 1 | \bD[t'], \bE[t] ) \bigg)  \\
+& - \eta \lambda_2 sgn( w_{n, 0} ) \\
+\end{align*}
+
+\begin{align*}
+w_{o, 0} = w_{o, 0} + \Delta w_{o, 0}[\nu] \textrm{\,\,\,\,, where}
+\end{align*}
+\begin{align*}
+\Delta w_{o, 0}[\nu] &= \mu \cdot \Delta w_{o, 0}[\nu-1]  + \eta \frac{1}{T}\sum\limits_t  \bigg( Q( H_o^{(3)} = 1 | \bD[t], \bE[t] ) \\
+& - Q( H_o^{(3)} = 1 | \bD[t'], \bE[t]) \bigg) \\
+& - \eta \lambda_2 sgn( w_{o, 0} ) \\
+\end{align*}
+
+
+\begin{align*}
+w_{m, n} = w_{m, n} + \Delta w_{m, n}[\nu] \textrm{\,\,\,\,, where}
+\end{align*}
+\begin{align*}
+\Delta w_{m, n}[\nu] & = \mu \cdot  \Delta w_{m, n}[\nu-1]  + \eta \frac{1}{T}\sum\limits_t  \bigg( Q( H_m^{(1)} = 1 | \bD[t], \bE[t] ) Q( H_n^{(2)} = 1 | \bD[t], \bE[t] )\\
+										   & - Q( H_m^{(1)} = 1 | \bD[t'], \bE[t] ) Q( H_n^{(2)} = 1 | \bD[t'], \bE[t]) \bigg)  \\
+										   & - \eta \lambda_2 sgn( w_{m, n} ) \\
+\end{align*}
+
+
+\begin{align*}
+w_{n, o} = w_{n, o} + \Delta w_{n, o}[\nu]  \textrm{\,\,\,\,, where}
+\end{align*}
+\begin{align*}
+\Delta w_{n, o}[\nu] &= \mu \cdot \Delta w_{n, o}[\nu-1] + \eta \frac{1}{T}\sum\limits_t  \bigg( Q( H_n^{(2)} = 1 | \bD[t], \bE[t] ) Q( H_o^{(3)} = 1 | \bD[t], \bE[t] ) \\
+										   & - Q( H_n^{(2)} = 1 | \bD[t'], \bE[t]) Q( H_o^{(3)} = 1 | \bD[t'], \bE[t]) \bigg) \\
+										   & - \eta \lambda_2 sgn( w_{n, o} )  \\
+\end{align*}
+
+
+
+\subsection{Parameter updates for the structure part of the BSM}
+To learn the parameters $w_{k,0}$, $w_{k,r}$, $w_{r,0}$ involving the variables $\bE$ and $\bG$ of the BSM part modeling the shape structure, we similarly perform contrastive divergence with the following steps:
+
+\textbf{Inference.}  Given the observed point existences $\bE[t]$, we infer the following distribution over the latent variables $\bG$ (we note that this is exact inference): 
+
+\begin{align*}
+Q( G_r = 1 | \bE[t] ) = \sigma(  w_{r, 0} + \sum\limits_{k} w_{k, r} E_k[t]  )
+\end{align*}
+
+\textbf{Sampling.} We sample the binary latent variables $\bG$ according to the inferred distribution $Q( G_r=1 | \bE[t] )$. Let $G_r[t']$ the resulting sampled $0/1$ values. We perform inference for the existence variables as follows:
+
+\begin{align*}
+Q( E_k = 1 | \bG[t'] ) = \sigma(  w_{k, 0} + \sum\limits_{r} w_{k, r} G_r[t']  )
+\end{align*}
+
+and repeat for the latent variables:
+
+\begin{align*}
+Q( G_r = 1 | \bG[t'] ) = \sigma(  w_{r, 0} + \sum\limits_{k} w_{k, r} Q( E_k = 1 | \bG[t'] ) )
+\end{align*}
+
+ 
+\textbf{Parameter updates} The parameters of the structure part of the BSM are updated as follows:
+
+
+\begin{align*}
+w_{k, 0} = w_{k, 0} + \Delta w_{k, 0}[\nu] \textrm{\,\,\,\,, where}
+\end{align*}
+\begin{align*}
+\Delta w_{k, 0}[\nu] &= \mu \cdot \Delta w_{k, 0}[\nu-1]  + \eta \frac{1}{T}\sum\limits_t  \bigg( E_k[t] - Q( E_k = 1 | \bG[t'] ) \bigg) \\
+& - \eta \lambda_1 \sum\limits_{k' \in \mN_k} sgn( w_{k, 0} - w_{k', 0} ) - \eta \lambda_2 sgn( w_{k, 0} )  \\
+\end{align*}
+
+\begin{align*}
+w_{r, 0} = w_{r, 0} + \Delta w_{r, 0}[\nu]   \textrm{\,\,\,\,, where}
+\end{align*}
+\begin{align*}
+\Delta w_{r, 0}[\nu] &= \mu \cdot \Delta w_{r, 0}[\nu-1] + \eta \frac{1}{T}\sum\limits_t  \bigg( Q( G_r = 1 | \bE[t] ) - Q( G_r =1 | \bG[t'] ) \bigg) \\
+&  - \eta \lambda_2 sgn( w_{r, 0} ) 
+\end{align*}
+
+
+\begin{align*}
+w_{k, r} = w_{k, r} + \Delta w_{k, r}[\nu] \textrm{\,\,\,\,, where}
+\end{align*}
+\begin{align*}
+\Delta w_{k, r}[\nu] &= \mu \cdot \Delta w_{k, r}[\nu-1] + \eta \frac{1}{T}\sum\limits_t  \bigg( E_k[t] Q( G_r = 1 | \bE[t] ) \\ 
+& - Q( E_k = 1 | \bG[t'] )Q( G_r =1 | \bG[t'] ) \bigg) \\
+&  - \eta \lambda_1 \sum\limits_{k' \in \mN_k} sgn( w_{k, r} - w_{k', r} ) - \eta \lambda_2 sgn(w_{k, r})  \\
+\end{align*}
+

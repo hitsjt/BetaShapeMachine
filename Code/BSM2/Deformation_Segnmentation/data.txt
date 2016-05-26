@@ -1,0 +1,898 @@
+bench000009.obj
+bench000022.obj
+bench000066.obj
+bench000077.obj
+bench000142.obj
+bench000159.obj
+bench000165.obj
+bench000180.obj
+bench000182.obj
+bench000185.obj
+bench000198.obj
+bench000286.obj
+bench000459.obj
+bench001299.obj
+bench001474.obj
+bench003140.obj
+bench003536.obj
+bench003814.obj
+bench004545.obj
+bench004654.obj
+bench005146.obj
+chair000015.obj
+chair000017.obj
+chair000020.obj
+chair000026.obj
+chair000033.obj
+chair000038.obj
+chair000039.obj
+chair000043.obj
+chair000045.obj
+chair000047.obj
+chair000048.obj
+chair000050.obj
+chair000051.obj
+chair000064.obj
+chair000067.obj
+chair000078.obj
+chair000091.obj
+chair000096.obj
+chair000104.obj
+chair000255.obj
+chair000815.obj
+chair000999.obj
+chair001017.obj
+chair001440.obj
+chair001445.obj
+chair001616.obj
+chair001694.obj
+chair001830.obj
+chair002445.obj
+chair002967.obj
+chair003089.obj
+chair003239.obj
+chair003319.obj
+chair004190.obj
+chair004332.obj
+chair004702.obj
+chair004867.obj
+chair004867_AUTOALIGNED.obj
+chair004939.obj
+chair004955.obj
+chair004973.obj
+chair005529.obj
+chair005690.obj
+chair005993.obj
+chair006523.obj
+chair006589.obj
+chair006890.obj
+chair007163.obj
+chair007317.obj
+chair008002.obj
+chair008248.obj
+chair008388.obj
+chair009200.obj
+chair009237.obj
+chair009645.obj
+chair009710.obj
+chair009822.obj
+chair009827.obj
+chair009957.obj
+chair011248.obj
+chair011259.obj
+chair011260.obj
+chair011488.obj
+chair011493.obj
+chair012124.obj
+chair013111.obj
+chair013722.obj
+chair013754.obj
+chair013989.obj
+chair014124.obj
+chair014172.obj
+chair014478.obj
+chair014776.obj
+chair015046.obj
+chair015397.obj
+chair015592.obj
+chair015679.obj
+chair016616.obj
+chair016644.obj
+bench000009.obj
+bench000022.obj
+bench000066.obj
+bench000077.obj
+bench000142.obj
+bench000159.obj
+bench000165.obj
+bench000180.obj
+bench000182.obj
+bench000185.obj
+bench000198.obj
+bench000286.obj
+bench000459.obj
+bench001299.obj
+bench001474.obj
+bench003140.obj
+bench003536.obj
+bench003814.obj
+bench004545.obj
+bench004654.obj
+bench005146.obj
+chair000015.obj
+chair000017.obj
+chair000020.obj
+chair000026.obj
+chair000033.obj
+chair000038.obj
+chair000039.obj
+chair000043.obj
+chair000045.obj
+chair000047.obj
+chair000048.obj
+chair000050.obj
+chair000051.obj
+chair000064.obj
+chair000067.obj
+chair000078.obj
+chair000091.obj
+chair000096.obj
+chair000104.obj
+chair000255.obj
+chair000815.obj
+chair000999.obj
+chair001017.obj
+chair001440.obj
+chair001445.obj
+chair001616.obj
+chair001694.obj
+chair001830.obj
+chair002445.obj
+chair002967.obj
+chair003089.obj
+chair003239.obj
+chair003319.obj
+chair004190.obj
+chair004332.obj
+chair004702.obj
+chair004867_AUTOALIGNED.obj
+chair004939.obj
+chair004955.obj
+chair004973.obj
+chair005529.obj
+chair005690.obj
+chair005993.obj
+chair006523.obj
+chair006589.obj
+chair006890.obj
+chair007163.obj
+chair007317.obj
+chair008002.obj
+chair008248.obj
+chair008388.obj
+chair009200.obj
+chair009237.obj
+chair009645.obj
+chair009710.obj
+chair009822.obj
+chair009827.obj
+chair009957.obj
+chair011248.obj
+chair011259.obj
+chair011260.obj
+chair011488.obj
+chair011493.obj
+chair012124.obj
+chair013111.obj
+chair013722.obj
+chair013754.obj
+chair013989.obj
+chair014124.obj
+chair014172.obj
+chair014478.obj
+chair014776.obj
+chair015046.obj
+chair015397.obj
+chair015592.obj
+chair015679.obj
+chair016616.obj
+chair016644.obj
+bench000009.obj
+bench000022.obj
+bench000066.obj
+bench000077.obj
+bench000142.obj
+bench000159.obj
+bench000165.obj
+bench000180.obj
+bench000182.obj
+bench000185.obj
+bench000198.obj
+bench000286.obj
+bench000459.obj
+bench001299.obj
+bench001474.obj
+bench003140.obj
+bench003536.obj
+bench003814.obj
+bench004545.obj
+bench004654.obj
+bench005146.obj
+chair000015.obj
+chair000017.obj
+chair000020.obj
+chair000026.obj
+chair000033.obj
+chair000038.obj
+chair000039.obj
+chair000043.obj
+chair000045.obj
+chair000047.obj
+chair000048.obj
+chair000050.obj
+chair000051.obj
+chair000064.obj
+chair000067.obj
+chair000078.obj
+chair000091.obj
+chair000096.obj
+chair000104.obj
+chair000255.obj
+chair000815.obj
+chair000999.obj
+chair001017.obj
+chair001440.obj
+chair001445.obj
+chair001616.obj
+chair001694.obj
+chair001830.obj
+chair002445.obj
+chair002967.obj
+chair003089.obj
+chair003239.obj
+chair003319.obj
+chair004190.obj
+chair004332.obj
+chair004702.obj
+chair004867.obj
+chair004939.obj
+chair004955.obj
+chair004973.obj
+chair005529.obj
+chair005690.obj
+chair005993.obj
+chair006523.obj
+chair006589.obj
+chair006890.obj
+chair007163.obj
+chair007317.obj
+chair008002.obj
+chair008248.obj
+chair008388.obj
+chair009200.obj
+chair009237.obj
+chair009645.obj
+chair009710.obj
+chair009822.obj
+chair009827.obj
+chair009957.obj
+chair011248.obj
+chair011259.obj
+chair011260.obj
+chair011488.obj
+chair011493.obj
+chair012124.obj
+chair013111.obj
+chair013722.obj
+chair013754.obj
+chair013989.obj
+chair014124.obj
+chair014172.obj
+chair014478.obj
+chair014776.obj
+chair015046.obj
+chair015397.obj
+chair015592.obj
+chair015679.obj
+chair016616.obj
+chair016644.obj
+bench000009.obj
+bench000022.obj
+bench000066.obj
+bench000077.obj
+bench000142.obj
+bench000159.obj
+bench000165.obj
+bench000180.obj
+bench000182.obj
+bench000185.obj
+bench000198.obj
+bench000286.obj
+bench000459.obj
+bench001299.obj
+bench001474.obj
+bench003140.obj
+bench003536.obj
+bench003814.obj
+bench004545.obj
+bench004654.obj
+bench005146.obj
+chair000015.obj
+chair000017.obj
+chair000020.obj
+chair000026.obj
+chair000033.obj
+chair000038.obj
+chair000039.obj
+chair000043.obj
+chair000045.obj
+chair000047.obj
+chair000048.obj
+chair000050.obj
+chair000051.obj
+chair000064.obj
+chair000067.obj
+chair000078.obj
+chair000091.obj
+chair000096.obj
+chair000104.obj
+chair000255.obj
+chair000815.obj
+chair000999.obj
+chair001017.obj
+chair001440.obj
+chair001445.obj
+chair001616.obj
+chair001694.obj
+chair001830.obj
+chair002445.obj
+chair002967.obj
+chair003089.obj
+chair003239.obj
+chair003319.obj
+chair004190.obj
+chair004332.obj
+chair004702.obj
+chair004867.obj
+chair004939.obj
+chair004955.obj
+chair004973.obj
+chair005529.obj
+chair005690.obj
+chair005993.obj
+chair006523.obj
+chair006589.obj
+chair006890.obj
+chair007163.obj
+chair007317.obj
+chair008002.obj
+chair008248.obj
+chair008388.obj
+chair009200.obj
+chair009237.obj
+chair009645.obj
+chair009710.obj
+chair009822.obj
+chair009827.obj
+chair009957.obj
+chair011248.obj
+chair011259.obj
+chair011260.obj
+chair011488.obj
+chair011493.obj
+chair012124.obj
+chair013111.obj
+chair013722.obj
+chair013754.obj
+chair013989.obj
+chair014124.obj
+chair014172.obj
+chair014478.obj
+chair014776.obj
+chair015046.obj
+chair015397.obj
+chair015592.obj
+chair015679.obj
+chair016616.obj
+chair016644.obj
+E:\data\chair_gt_new
+E:\data\chair_gt_new
+chair
+current_deform_mode 0
+out_eva_path ---------- E:\data\chair_gt_new/eva_out_0
+bench000009.obj
+0 1 2 3 4 5 8 9 
+valid group 
+0 1 2 3 4 5 8 9 
+bench000022.obj
+0 1 3 4 
+valid group 
+0 1 3 4 
+bench000066.obj
+0 1 3 4 6 
+valid group 
+0 1 2 3 4 5 
+bench000077.obj
+0 2 3 4 5 
+valid group 
+0 1 2 3 4 5 
+bench000142.obj
+0 1 2 5 
+valid group 
+0 1 2 3 4 5 8 9 
+bench000159.obj
+0 1 2 3 4 5 6 8 9 
+valid group 
+0 1 2 3 4 5 8 9 
+bench000165.obj
+0 1 8 9 
+valid group 
+0 1 3 4 8 9 
+bench000180.obj
+0 1 2 3 4 5 8 9 
+valid group 
+0 1 2 3 4 5 8 9 
+bench000182.obj
+0 1 2 3 4 5 8 9 
+valid group 
+0 1 2 3 4 5 8 9 
+bench000185.obj
+0 1 3 4 
+valid group 
+0 1 3 4 
+bench000198.obj
+0 1 2 5 
+valid group 
+0 1 2 3 4 5 
+bench000286.obj
+0 1 2 3 4 5 6 8 9 
+valid group 
+0 1 2 3 4 5 
+bench000459.obj
+0 1 2 3 4 5 6 
+valid group 
+0 1 2 3 4 5 8 9 
+bench001299.obj
+0 1 6 8 9 
+valid group 
+0 1 2 3 4 5 8 9 
+bench001474.obj
+0 1 
+valid group 
+0 1 2 3 4 5 
+bench003140.obj
+0 1 2 3 4 5 8 9 
+valid group 
+0 1 2 3 4 5 8 9 
+bench003536.obj
+0 1 2 5 6 7 8 9 
+valid group 
+0 1 2 3 4 5 
+bench003814.obj
+0 1 2 3 4 5 6 9 
+valid group 
+0 1 2 3 4 5 8 9 
+bench004545.obj
+0 1 2 3 4 5 
+valid group 
+0 1 2 3 4 5 
+bench004654.obj
+0 8 9 
+valid group 
+0 1 3 4 
+bench005146.obj
+0 1 
+valid group 
+0 1 3 4 
+chair000015.obj
+0 1 6 
+valid group 
+0 1 6 7 8 9 
+chair000017.obj
+0 1 2 3 4 5 6 7 8 9 
+valid group 
+0 1 2 3 4 5 8 9 
+chair000020.obj
+1 
+valid group 
+0 1 2 3 4 5 
+chair000026.obj
+0 1 2 3 4 5 8 9 
+valid group 
+0 1 2 3 4 5 8 9 
+chair000033.obj
+0 1 2 3 4 5 
+valid group 
+0 1 2 3 4 5 
+chair000038.obj
+0 1 2 5 6 
+valid group 
+0 1 2 3 4 5 8 9 
+chair000039.obj
+0 2 3 4 5 
+valid group 
+0 1 2 3 4 5 
+chair000043.obj
+0 1 
+valid group 
+0 1 2 3 4 5 
+chair000045.obj
+0 1 2 3 4 5 
+valid group 
+0 1 2 3 4 5 
+chair000047.obj
+0 1 2 3 4 5 6 
+valid group 
+0 1 2 3 4 5 8 9 
+chair000048.obj
+0 1 2 3 4 5 
+valid group 
+0 1 2 3 4 5 
+chair000050.obj
+0 1 3 4 
+valid group 
+0 1 2 3 4 5 
+chair000051.obj
+0 1 2 3 4 5 
+valid group 
+0 1 2 3 4 5 
+chair000064.obj
+1 
+valid group 
+0 1 2 3 4 5 
+chair000067.obj
+1 2 3 4 5 
+valid group 
+0 1 2 3 4 5 
+chair000078.obj
+1 2 5 
+valid group 
+0 1 2 3 4 5 
+chair000091.obj
+0 1 2 3 4 5 8 9 
+valid group 
+0 1 2 3 4 5 8 9 
+chair000096.obj
+0 1 6 
+valid group 
+0 1 6 7 
+chair000104.obj
+1 2 5 8 9 
+valid group 
+0 1 2 3 4 5 
+chair000255.obj
+0 1 6 
+valid group 
+0 1 6 7 
+chair000815.obj
+0 1 3 
+valid group 
+0 1 2 3 4 5 
+chair000999.obj
+1 3 4 
+valid group 
+0 1 2 3 4 5 
+chair001017.obj
+0 1 2 3 4 5 7 
+valid group 
+0 1 2 3 4 5 
+chair001440.obj
+0 1 2 5 
+valid group 
+0 1 2 3 4 5 
+chair001445.obj
+0 1 2 3 4 5 6 7 
+valid group 
+0 1 2 3 4 5 8 9 
+chair001616.obj
+0 1 5 
+valid group 
+0 1 2 3 4 5 
+chair001694.obj
+0 1 2 3 4 5 6 7 
+valid group 
+0 1 2 3 4 5 
+chair001830.obj
+0 1 2 3 4 5 
+valid group 
+0 1 2 3 4 5 
+chair002445.obj
+0 1 2 3 4 5 
+valid group 
+0 1 2 3 4 5 
+chair002967.obj
+0 1 2 3 4 5 
+valid group 
+0 1 2 3 4 5 
+chair003089.obj
+0 1 3 4 
+valid group 
+0 1 2 3 4 5 
+chair003239.obj
+0 1 2 3 4 5 6 8 9 
+valid group 
+0 1 2 3 4 5 8 9 
+chair003319.obj
+0 1 2 3 4 5 6 8 9 
+valid group 
+0 1 2 3 4 5 8 9 
+chair004190.obj
+0 1 2 3 4 5 
+valid group 
+0 1 2 3 4 5 
+chair004332.obj
+0 1 2 3 4 5 6 8 9 
+valid group 
+0 1 2 3 4 5 8 9 
+chair004702.obj
+0 1 2 3 4 5 
+valid group 
+0 1 2 3 4 5 
+chair004867.obj
+6 
+valid group 
+0 1 2 3 4 5 
+chair004867_AUTOALIGNED.obj
+0 1 2 5 6 8 9 
+valid group 
+0 1 2 3 4 5 
+chair004939.obj
+0 1 2 3 4 5 
+valid group 
+0 1 2 3 4 5 
+chair004955.obj
+0 1 2 3 4 5 6 7 8 9 
+valid group 
+0 1 2 3 4 5 8 9 
+chair004973.obj
+0 1 2 3 4 5 
+valid group 
+0 1 2 3 4 5 
+chair005529.obj
+0 1 6 7 
+valid group 
+0 1 6 7 8 9 
+chair005690.obj
+0 1 3 
+valid group 
+0 1 2 3 4 5 
+chair005993.obj
+0 1 6 8 9 
+valid group 
+0 1 6 7 
+chair006523.obj
+0 1 2 3 4 5 6 7 
+valid group 
+0 1 2 3 4 5 8 9 
+chair006589.obj
+1 2 3 4 5 
+valid group 
+0 1 2 3 4 5 8 9 
+chair006890.obj
+1 2 5 
+valid group 
+0 1 2 3 4 5 8 9 
+chair007163.obj
+0 1 2 3 4 5 
+valid group 
+0 1 2 3 4 5 
+chair007317.obj
+0 1 2 3 4 5 
+valid group 
+0 1 2 3 4 5 
+chair008002.obj
+0 1 6 7 
+valid group 
+0 1 6 7 
+chair008248.obj
+0 1 2 3 4 5 8 9 
+valid group 
+0 1 2 3 4 5 8 9 
+chair008388.obj
+1 2 3 4 5 
+valid group 
+0 1 2 3 4 5 
+chair009200.obj
+0 2 3 4 5 
+valid group 
+0 1 2 3 4 5 
+chair009237.obj
+0 1 2 3 4 5 6 7 
+valid group 
+0 1 2 3 4 5 8 9 
+chair009645.obj
+0 1 2 3 4 5 6 7 
+valid group 
+0 1 2 3 4 5 
+chair009710.obj
+0 1 2 3 4 5 
+valid group 
+0 1 2 3 4 5 
+chair009822.obj
+0 1 2 3 4 5 
+valid group 
+0 1 2 3 4 5 
+chair009827.obj
+0 1 6 8 9 
+valid group 
+0 1 6 7 
+chair009957.obj
+0 1 2 3 4 5 
+valid group 
+0 1 2 3 4 5 
+chair011248.obj
+0 1 2 3 4 5 
+valid group 
+0 1 2 3 4 5 
+chair011259.obj
+0 1 2 3 4 5 6 
+valid group 
+0 1 2 3 4 5 
+chair011260.obj
+1 2 3 4 5 6 
+valid group 
+0 1 2 3 4 5 
+chair011488.obj
+0 1 2 3 4 5 6 
+valid group 
+0 1 2 3 4 5 
+chair011493.obj
+0 1 2 3 4 5 7 8 9 
+valid group 
+0 1 2 3 4 5 8 9 
+chair012124.obj
+0 1 6 
+valid group 
+0 1 6 7 
+chair013111.obj
+0 1 2 3 4 5 6 8 9 
+valid group 
+0 1 2 3 4 5 8 9 
+chair013722.obj
+0 1 2 5 
+valid group 
+0 1 2 3 4 5 
+chair013754.obj
+0 1 2 3 4 5 6 7 8 9 
+valid group 
+0 1 2 3 4 5 8 9 
+chair013989.obj
+1 2 3 4 5 6 
+valid group 
+0 1 2 3 4 5 
+chair014124.obj
+0 1 2 3 4 5 6 7 
+valid group 
+0 1 2 3 4 5 
+chair014172.obj
+0 1 2 3 4 5 6 
+valid group 
+0 1 2 3 4 5 
+chair014478.obj
+0 1 2 3 4 5 
+valid group 
+0 1 2 3 4 5 
+chair014776.obj
+0 1 2 3 4 5 8 9 
+valid group 
+0 1 2 3 4 5 
+chair015046.obj
+0 1 2 3 4 5 6 7 
+valid group 
+0 1 2 3 4 5 
+chair015397.obj
+0 1 6 8 9 
+valid group 
+0 1 2 3 4 5 8 9 
+chair015592.obj
+0 1 2 3 4 5 6 
+valid group 
+0 1 2 3 4 5 
+chair015679.obj
+0 1 2 3 4 5 
+valid group 
+0 1 2 3 4 5 
+chair016616.obj
+0 1 2 4 
+valid group 
+0 1 2 3 4 5 
+chair016644.obj
+0 1 2 3 4 5 6 7 
+valid group 
+0 1 2 3 4 5 8 9 
+end 
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
+4257
+finish read temp
+finish read mesh
